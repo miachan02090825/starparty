@@ -14,7 +14,7 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{font-size:14px}
-    body{font-family:'Nunito',sans-serif;background:#0f1225;color:#fff;overflow-x:hidden}
+    body{font-family:'Nunito',sans-serif;background:#0f1225;color:#fff;overflow-x:hidden;max-width:100vw}
     ::-webkit-scrollbar{width:5px;height:5px}
     ::-webkit-scrollbar-track{background:transparent}
     ::-webkit-scrollbar-thumb{background:#4858a8;border-radius:10px}
@@ -24,7 +24,7 @@
     .sidebar-link.active{color:#7c9fff;font-weight:700}
     .nav-icon{width:16px;height:16px;object-fit:contain;border-radius:3px;flex-shrink:0}
 
-    /* FULL-COVER IMAGE CARD — the core new pattern */
+    /* FULL-COVER IMAGE CARD */
     .img-card{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
     .img-card:hover{transform:translateY(-4px) scale(1.015);box-shadow:0 8px 30px rgba(0,0,0,.4)}
     .img-card img.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
@@ -44,7 +44,7 @@
 
     .hamburger-btn{display:none}
     .sidebar-overlay{display:none}
-    @media(max-width:767px){
+    @media(max-width:1023px){
       .hamburger-btn{display:flex}
       #sidebar{transform:translateX(-100%);transition:transform .3s ease}
       #sidebar.open{transform:translateX(0)}
@@ -95,7 +95,7 @@
     </aside>
 
     <!-- ========== MAIN ========== -->
-    <main class="flex-1 ml-0 md:ml-[140px] min-h-screen flex flex-col">
+    <main class="flex-1 ml-0 lg:ml-[140px] min-h-screen flex flex-col overflow-x-hidden">
 
       <!-- Top Bar -->
       <header class="sticky top-0 z-40 bg-sp-bg/85 backdrop-blur-xl border-b border-sp-border/30">
@@ -116,7 +116,7 @@
       </header>
 
       <!-- Content -->
-      <div class="flex-1 p-3 md:p-5 lg:p-6 space-y-6 md:space-y-8 lg:space-y-10">
+      <div class="flex-1 p-3 md:p-4 lg:p-6 space-y-5 md:space-y-7 lg:space-y-10">
 
         <!-- ROW 1: Information + News -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
@@ -144,13 +144,13 @@
           <!-- News (Bento grid) -->
           <div class="md:col-span-8">
             <h2 class="text-sm md:text-base font-bold mb-2 md:mb-3 text-white/90">News</h2>
-            <div class="grid grid-cols-2 md:grid-cols-12 gap-2 md:gap-2.5 h-auto md:h-[310px]">
-              <div class="col-span-2 md:col-span-7 img-card h-[180px] md:h-auto">
+            <div class="grid grid-cols-2 lg:grid-cols-12 gap-2 md:gap-2.5 h-auto lg:h-[310px]">
+              <div class="col-span-2 lg:col-span-7 img-card h-[180px] lg:h-auto">
                 <img src="./assets/images/news-main.png" alt="bloxd.io" class="cover">
                 <div class="overlay"></div>
                 <span class="label bottom-3 left-3 text-xl md:text-2xl font-black drop-shadow-lg">bloxd.io</span>
               </div>
-              <div class="col-span-2 md:col-span-5 grid grid-rows-2 gap-2 md:gap-2.5">
+              <div class="col-span-2 lg:col-span-5 grid grid-rows-2 gap-2 md:gap-2.5">
                 <div class="grid grid-cols-2 gap-2 md:gap-2.5">
                   <div class="img-card h-[80px] md:h-auto"><img src="./assets/images/game-grassland.png" alt="GrassLand" class="cover"><div class="overlay"></div><span class="label bottom-1.5 left-2 text-[9px] md:text-[10px] font-bold drop-shadow">GrassLand</span></div>
                   <div class="img-card h-[80px] md:h-auto"><img src="./assets/images/game-find-diff.png" alt="Find the Differences" class="cover"><div class="overlay"></div><span class="label bottom-1.5 left-2 text-[9px] md:text-[10px] font-bold drop-shadow">Find the Differences</span></div>
@@ -175,8 +175,8 @@
         </div>
 
         <!-- ROW 3: Banner + Categories — FULL-COVER IMAGE CARDS -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
-          <div class="md:col-span-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-4">
+          <div class="lg:col-span-4">
             <h2 class="text-sm md:text-base font-bold mb-2 md:mb-3 text-white/90">Banner</h2>
             <div class="img-card h-[90px] md:h-[110px]">
               <img src="./assets/images/games/clash-quest.png" alt="Clash Quest" class="cover">
@@ -192,9 +192,9 @@
               </div>
             </div>
           </div>
-          <div class="md:col-span-8">
-            <h2 class="text-sm md:text-base font-bold mb-2 md:mb-3 text-white/90 md:invisible">Categories</h2>
-            <div id="catGrid" class="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-3 h-auto md:h-[110px]"></div>
+          <div class="lg:col-span-8">
+            <h2 class="text-sm md:text-base font-bold mb-2 md:mb-3 text-white/90 lg:invisible">Categories</h2>
+            <div id="catGrid" class="grid grid-cols-3 sm:grid-cols-5 gap-2 md:gap-3 h-auto lg:h-[110px]"></div>
           </div>
         </div>
 
@@ -217,18 +217,18 @@
     /* ── Event Cards: Full-Cover Image Cards ── */
     const events=[
       {name:"Spring Fest", status:"Active",      sColor:"bg-green-500", img:"./assets/images/events/spring-fest.png"},
-      {name:"Time Warp",   status:"Limmed Time", sColor:"bg-red-500",   img:"./assets/images/events/time-warp.png"},
+      {name:"Time Warp",   status:"Limited Time", sColor:"bg-red-500",   img:"./assets/images/events/time-warp.png"},
       {name:"Star Crown",  status:"Active",      sColor:"bg-green-500", img:"./assets/images/events/star-crown.png"},
       {name:"Arena Blitz",  status:"Active",     sColor:"bg-green-500", img:"./assets/images/events/arena-blitz.png"},
       {name:"Cosmic Race",  status:"Active",     sColor:"bg-green-500", img:"./assets/images/events/cosmic-race.png"},
-      {name:"Frost Event",  status:"Limmed Time",sColor:"bg-red-500",   img:"./assets/images/events/frost.png"},
+      {name:"Frost Event",  status:"Limited Time",sColor:"bg-red-500",   img:"./assets/images/events/frost.png"},
       {name:"Lucky Draw",   status:"Active",     sColor:"bg-green-500", img:"./assets/images/events/lucky-draw.png"},
       {name:"Galaxy Tour",  status:"Active",     sColor:"bg-green-500", img:"./assets/images/events/galaxy-tour.png"},
     ];
     const eCont=document.getElementById('eventScroll');
     events.forEach(ev=>{
       eCont.innerHTML+=`
-        <div class="img-card flex-shrink-0 w-[120px] md:w-[150px]" style="scroll-snap-align:start">
+        <div class="img-card flex-shrink-0 w-[140px] sm:w-[150px] md:w-[160px]" style="scroll-snap-align:start">
           <div class="h-[100px] md:h-[130px] relative overflow-hidden">
             <img src="${ev.img}" alt="${ev.name}" class="cover">
             <div class="overlay"></div>
@@ -273,7 +273,7 @@
     const gCont=document.getElementById('continueScroll');
     games.forEach(g=>{
       gCont.innerHTML+=`
-        <div class="img-card flex-shrink-0 w-[130px] md:w-[160px]" style="scroll-snap-align:start">
+        <div class="img-card flex-shrink-0 w-[145px] sm:w-[155px] md:w-[165px]" style="scroll-snap-align:start">
           <div class="h-[85px] md:h-[100px] relative overflow-hidden rounded-t-xl">
             <img src="${g.img}" alt="${g.name}" class="cover">
             <div class="overlay"></div>

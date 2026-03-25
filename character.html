@@ -37,7 +37,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 14px; }
-    body { font-family: 'Nunito', sans-serif; background: #0f1225; color: #fff; overflow-x: hidden; }
+    body { font-family: 'Nunito', sans-serif; background: #0f1225; color: #fff; overflow-x: hidden; max-width: 100vw; }
 
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -71,7 +71,7 @@
     .hamburger-btn { display: none; }
     .sidebar-overlay { display: none; }
 
-    @media (max-width: 767px) {
+    @media (max-width: 1023px) {
       .hamburger-btn { display: flex; }
       #sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
       #sidebar.open { transform: translateX(0); }
@@ -156,7 +156,7 @@
     </aside>
 
     <!-- ===================== MAIN ===================== -->
-    <main class="flex-1 ml-0 md:ml-[140px] min-h-screen flex flex-col">
+    <main class="flex-1 ml-0 lg:ml-[140px] min-h-screen flex flex-col overflow-x-hidden">
 
       <!-- ── TOP BAR: Resource Pills ── -->
       <header class="sticky top-0 z-40 bg-sp-bg/85 backdrop-blur-xl border-b border-sp-border/30">
@@ -243,7 +243,7 @@
           </div>
 
           <!-- Character Grid -->
-          <div id="charGrid" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-2.5 overflow-y-auto flex-1 pr-1" style="max-height: calc(100vh - 230px);">
+          <div id="charGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 md:gap-2.5 flex-1 pr-1">
             <!-- JS rendered -->
           </div>
         </div>

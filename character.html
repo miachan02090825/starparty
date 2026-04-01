@@ -51,9 +51,9 @@
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
     .float-anim { animation: float 3s ease-in-out infinite; }
 
-    .char-card { transition: all 0.2s ease; cursor: pointer; position: relative; border: 2px solid transparent; border-radius: 12px; overflow: hidden; }
-    .char-card:hover { transform: translateY(-3px); border-color: rgba(124,58,237,0.4); box-shadow: 0 0 15px rgba(124,58,237,0.2); }
-    .char-card.selected { border-color: #7c3aed; box-shadow: 0 0 20px rgba(124,58,237,0.4), 0 0 40px rgba(124,58,237,0.15); }
+    .char-card { transition: all 0.2s ease; cursor: pointer; position: relative; border-radius: 22px; }
+    .char-card:hover { transform: translateY(-3px); }
+    .char-card.selected > div:first-child { border-color: #7c3aed; box-shadow: 0 0 20px rgba(124,58,237,0.4), 0 0 40px rgba(124,58,237,0.15); }
 
     .filter-pill { transition: all 0.15s ease; cursor: pointer; }
     .filter-pill:hover { background: rgba(72, 88, 168, 0.3); }
@@ -604,26 +604,21 @@
       "./assets/images/characters/娃娃15.png"
     ];
 
-    const characters = [
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:false },
-      { name:"Charm Name", lv:200, stars:5, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:false },
-      { name:"Charm Name", lv:200, stars:5, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:false },
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:3, shards:"29 / 30", clover:false },
-      { name:"Charm Name", lv:200, stars:5, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:false },
-      { name:"Charm Name", lv:200, stars:5, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:false },
-      { name:"Charm Name", lv:200, stars:3, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:5, shards:"29 / 30", clover:false },
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:4, shards:"29 / 30", clover:false },
-      { name:"Charm Name", lv:200, stars:5, shards:"29 / 30", clover:true  },
-      { name:"Charm Name", lv:200, stars:3, shards:"29 / 30", clover:false },
+    const charNames = [
+      "Lunar Dancer", "Star Knight", "Galaxy Mage", "Cosmic Oracle",
+      "Nebula Archer", "Comet Striker", "Nova Paladin", "Astral Rogue",
+      "Orbit Sentinel", "Meteor Monk", "Pulse Weaver", "Void Summoner",
+      "Eclipse Herald", "Solar Priest", "Vanguard", "Zenith Blade",
+      "Celestial Bard", "Quantum Sage"
     ];
+
+    const characters = Array.from({length: 18}, (_, i) => ({
+      name: charNames[i % charNames.length],
+      lv: 200,
+      stars: Math.floor(Math.random() * 5) + 1,
+      shards: "29 / 30",
+      clover: Math.random() > 0.5
+    }));
 
     const grid = document.getElementById('charGrid');
     
@@ -631,43 +626,80 @@
     grid.className = "flex flex-wrap justify-center sm:justify-start gap-3 md:gap-4 flex-1 pr-1 h-fit pb-10";
 
     characters.forEach((c, i) => {
-      const starsHTML = Array.from({length:5}, (_, s) =>
-        `<span class="text-[12px] opacity-100 ${s < c.stars ? 'star-on drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]' : 'text-black/30'}">⭐</span>`
-      ).join('');
-      const cloverHTML = c.clover ? `<span class="absolute top-2 right-2 w-[22px] h-[22px] rounded-full bg-sp-green flex items-center justify-center text-[11px] shadow">🍀</span>` : '';
-      const selected = i === 0 ? 'selected' : '';
+
+      const starsHTML = Array.from({length:5}, (_, s) => {
+        const isActive = s < c.stars;
+        const fill = isActive ? '#ffd700' : '#707070';
+        const stroke = isActive ? '#6e3000' : '#101130'; 
+        return `<svg viewBox="0 0 24 24" class="w-[20px] h-[20px] drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]" style="margin: 0 -1.5px;">
+          <path fill="${fill}" stroke="${stroke}" stroke-width="2" stroke-linejoin="round" d="M12 2l2.36 7.26a1 1 0 0 0 .95.69h7.62l-6.16 4.47a1 1 0 0 0-.36 1.11L18.77 22l-6.16-4.47a1 1 0 0 0-1.18 0L5.27 22l2.36-6.47a1 1 0 0 0-.36-1.11L1.11 9.95h7.62a1 1 0 0 0 .95-.69L12 2z"/>
+        </svg>`;
+      }).join('');
+
+      const cloverHTML = c.clover ? `<span class="text-[15px] leading-none drop-shadow-sm mt-0.5">🍀</span>` : '';
+      const selectedClass = i === 0 ? 'selected' : '';
       const imgSrc = charImgs[i % charImgs.length];
 
       grid.innerHTML += `
-        <div class="char-card flex-shrink-0 ${selected} w-[190px] h-[260px] rounded-[16px] flex flex-col overflow-hidden bg-gradient-to-b from-[#1b1e42] to-[#121430] border-2 border-transparent transition-transform hover:-translate-y-1 relative" onclick="selectCard(this)">
-          
-          <!-- Image Section -->
-          <div class="relative w-full flex-1 overflow-hidden rounded-t-[14px]">
-            <!-- Centered Image -->
-            <img src="${imgSrc}" alt="${c.name}" class="absolute inset-0 w-full h-full object-cover object-center">
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1b1e42]/80 via-transparent to-transparent"></div>
-            ${cloverHTML}
-            
-            <!-- Lv. Label -->
-            <div class="absolute top-2 left-2 z-10 flex items-center gap-1 drop-shadow-md">
-              <span class="text-[11px] font-black tracking-wide text-white" style="-webkit-text-stroke: 1px rgba(0,0,0,0.4);">Lv.</span>
-              <span class="text-[18px] font-black leading-none text-white">${c.lv}</span>
-            </div>
+        <div class="char-card flex-shrink-0 w-[185px] pb-2 flex flex-col relative transition-all cursor-pointer ${selectedClass}" onclick="selectCard(this)">
+           <!-- MAIN CARD -->
+           <div class="w-full h-[230px] rounded-[24px] border-[3.5px] border-[#ffba3a] bg-gradient-to-br from-[#2f31a2] via-[#22237a] to-[#db6b25] relative overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.3)] z-10 box-border transition-colors">
+              
+              <!-- Half-tone Pattern Overlay -->
+              <div class="absolute inset-0 opacity-[0.15] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_1px,transparent_1.5px)]" style="background-size: 8px 8px;"></div>
 
-            <!-- Bottom Orange Info Overlay -->
-            <div class="absolute bottom-2 left-2 right-2 bg-gradient-to-b from-[#ffba3a] to-[#f47b0a] rounded-[10px] flex flex-col items-center pt-1 pb-1.5 shadow-[0_4px_10px_rgba(244,123,10,0.4)] border border-[#ffba3a]/50">
-              <div class="flex justify-center gap-0.5 mb-0.5">${starsHTML}</div>
-              <span class="text-[15px] font-black tracking-wide text-white drop-shadow-[0_2px_1px_rgba(0,0,0,0.5)]" style="-webkit-text-stroke: 0.5px #cf5a00;">${c.name}</span>
-            </div>
-          </div>
-          
-          <!-- Shards Section -->
-          <div class="h-[36px] w-full bg-[#16183a] border-t border-white/5 flex items-center justify-center gap-2 relative z-20">
-            <span class="text-[14px] leading-none mb-0.5" style="color:#5fcfeb">♾️</span>
-            <span class="text-[14px] font-bold text-white tracking-widest">${c.shards}</span>
-          </div>
-          
+              <!-- Top Capsule Hole -->
+              <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-[42px] h-[10px] rounded-full bg-[#101130] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] z-20"></div>
+
+              <!-- Lv & Clover -->
+              <div class="absolute top-2.5 left-3 z-20 flex flex-col drop-shadow-md">
+                 <div class="flex items-center gap-1">
+                   <span class="text-[13px] font-black text-white leading-none tracking-wide">Lv.</span>
+                   ${cloverHTML}
+                 </div>
+                 <span class="text-[24px] font-black italic text-white leading-none mt-0.5" style="text-shadow: 1.5px 1.5px 0 #101130, -1.5px -1.5px 0 #101130, 1.5px -1.5px 0 #101130, -1.5px 1.5px 0 #101130;">${c.lv}</span>
+              </div>
+
+              <!-- Top Right Star Badge -->
+              <div class="absolute top-2.5 right-2.5 z-20 flex items-center justify-center w-[36px] h-[36px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
+                 <svg viewBox="0 0 24 24" class="absolute inset-0 w-full h-full text-[#ffd700]">
+                   <path fill="currentColor" stroke="#101130" stroke-width="1.8" stroke-linejoin="round" d="M12 2l2.36 7.26a1 1 0 0 0 .95.69h7.62l-6.16 4.47a1 1 0 0 0-.36 1.11L18.77 22l-6.16-4.47a1 1 0 0 0-1.18 0L5.27 22l2.36-6.47a1 1 0 0 0-.36-1.11L1.11 9.95h7.62a1 1 0 0 0 .95-.69L12 2z"/>
+                 </svg>
+                 <span class="absolute text-[13px] font-black text-[#101130] leading-none pt-[1px] tracking-tighter">20</span>
+              </div>
+
+              <!-- Character Render -->
+              <div class="absolute inset-x-0 bottom-[60px] top-[30px] flex items-end justify-center z-10 pointer-events-none">
+                 <img src="${imgSrc}" class="w-[115%] max-w-none h-auto object-contain object-bottom drop-shadow-[0_5px_8px_rgba(0,0,0,0.6)] translate-y-[30%]">
+              </div>
+
+              <!-- Bottom UI Overlay -->
+              <div class="absolute bottom-0 left-0 right-0 h-[65px] bg-gradient-to-t from-[#1b1c3b] via-[#1b1c3b]/80 to-transparent z-20 flex flex-col justify-end items-center pb-2.5">
+                 <!-- Stars -->
+                 <div class="flex items-center justify-center w-[120px] mb-0.5 z-30">
+                    ${starsHTML}
+                 </div>
+                 <!-- Charm Name -->
+                 <span class="text-[16px] font-black text-white whitespace-nowrap z-30" style="letter-spacing: 0.5px; text-shadow: 2.5px 2.5px 0 #181a4a, -1px -1px 0 #181a4a, 1px -1px 0 #181a4a, -1px 1.5px 0 #181a4a, 0 4px 5px rgba(0,0,0,0.8);">${c.name}</span>
+              </div>
+           </div>
+
+           <!-- BOTTOM SHARDS PROGRESS -->
+           <div class="w-[88%] h-[26px] mx-auto -mt-3.5 relative z-30 bg-[#323354] rounded-r-full rounded-l-[4px] border border-[#1b1e42]/40 shadow-[0_4px_6px_rgba(0,0,0,0.3)] flex justify-center items-center overflow-visible">
+              <!-- Progress Fill -->
+              <div class="absolute left-0 top-0 bottom-0 w-[94%] bg-gradient-to-r from-[#fed858] to-[#f47b0a] rounded-full shadow-[inset_0_2px_2px_rgba(255,255,255,0.4)]"></div>
+              
+              <!-- Text -->
+              <span class="relative z-10 text-[13px] font-black text-[#101130] tracking-wider mt-0.5" style="-webkit-text-stroke: 0.4px #ffffff; text-shadow: 0px 1px 0px rgba(255,255,255,0.6);">${c.shards}</span>
+
+              <!-- Floating Gem icon Left -->
+              <div class="absolute -left-[30px] -top-[10px] w-[46px] h-[46px] drop-shadow-[0_3px_5px_rgba(0,0,0,0.5)] z-40 flex items-center justify-center">
+                 <div class="absolute w-[34px] h-[34px] rotate-45 bg-gradient-to-br from-[#fff2b0] to-[#f47b0a] rounded-[8px] border-[2px] border-[#ffe780] overflow-hidden shadow-inner z-0"></div>
+                 <div class="w-[22px] h-[22px] bg-[#1b1d42] rounded-[4px] transform rotate-45 flex items-center justify-center z-10 shadow-inner overflow-hidden border border-[#1b1e42]">
+                    <span class="text-[12px] transform -rotate-45 block leading-none ml-px mb-0.5">🐱</span>
+                 </div>
+              </div>
+           </div>
         </div>`;
     });
 

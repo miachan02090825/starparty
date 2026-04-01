@@ -1,0 +1,175 @@
+/* Figma Styles of your File */
+:root {
+  /* Colors */
+  --progressbarcolor: linear-gradient(
+    90deg,
+    rgba(255, 152, 39, 1) 0%,
+    rgba(255, 203, 88, 1) 50%,
+    rgba(255, 239, 193, 1) 100%
+  );
+  --: linear-gradient(
+      180deg,
+      rgba(101, 239, 139, 1) 0%,
+      rgba(0, 148, 84, 0.45) 52.99999713897705%,
+      rgba(40, 192, 121, 1) 100%
+    ),
+    linear-gradient(to left, #00aa43, #00aa43);
+  --: linear-gradient(
+      180deg,
+      rgba(13, 32, 219, 0) 0%,
+      rgba(13, 32, 219, 0.4) 36.000001430511475%,
+      rgba(45, 100, 242, 1) 100%
+    ),
+    linear-gradient(to left, #4c68ff, #4c68ff);
+  --: linear-gradient(
+      180deg,
+      rgba(219, 192, 72, 0) 0%,
+      rgba(225, 98, 4, 0.4) 36.000001430511475%,
+      rgba(234, 123, 14, 1) 100%
+    ),
+    linear-gradient(to left, #f39f5b, #f39f5b);
+  --user-info: linear-gradient(
+    172.77deg,
+    rgba(110, 81, 169, 1) 0%,
+    rgba(66, 63, 142, 1) 56.99999928474426%,
+    rgba(52, 56, 124, 1) 85.00000238418579%,
+    rgba(49, 56, 113, 1) 100%
+  );
+
+  /* Fonts */
+  /* Effects */
+}
+/* Figma Color Variables of your File */
+:root,
+[data-variable-collection-mode="mode-1"] {
+  /* mode-1 */
+  --color1: #6e76b1;
+  --color2: #7a8fff;
+  --color3: #ffdd20;
+  --color4: #ff7420;
+  --color5: #2f3362;
+}
+
+:root,
+[data-devices-mode="pc"] {
+  /* pc */
+  --label-stroke: rgba(20, 22, 43, 0.7);
+}
+
+[data-devices-mode="mobile"] {
+  /* mobile */
+  --label-stroke: rgba(20, 22, 43, 0.7);
+}
+
+:root,
+[data-sidebar-link-mode="on"] {
+  /* on */
+  --icon-color: #5063b0;
+  --text-color: #5063b0;
+  --icon-color-2: rgba(80, 99, 176, 0.5);
+}
+
+[data-sidebar-link-mode="off"] {
+  /* off */
+  --icon-color: #9abfef;
+  --text-color: #ffffff;
+  --icon-color-2: rgba(154, 191, 239, 0.5);
+}
+
+:root,
+[data-design-color-mode="mode-1"] {
+  /* mode-1 */
+  --primary-800: #313871;
+  --primary-500: #6f82cf;
+  --primary-700: #384da1;
+  --primary-600: #5063b0;
+  --primary-300: #adceef;
+  --primary-400: #90b3f3;
+  --primary-50: #ffffff;
+  --primary-100: #eef7fc;
+  --primary-950: #1a1d3c;
+  --primary-200: #c9e2f2;
+  --primary-900: #2f3362;
+}
+
+:root,
+[data--mode=] {
+  /*  */
+  --bg-top: rgba(219, 192, 72, 0);
+  --bg-top: rgba(13, 32, 219, 0);
+  --bg-top: #65ef8b;
+  --bg-center: rgba(225, 98, 4, 0.4);
+  --bg-center: rgba(13, 32, 219, 0.4);
+  --bg-center: rgba(0, 148, 84, 0.45);
+  --bg-bottom: #ea7b0e;
+  --bg-bottom: #2d64f2;
+  --bg-bottom: #28c079;
+  --bg: #f39f5b;
+  --bg: #4c68ff;
+  --bg: #00aa43;
+  --border-color: #ffa337;
+  --border-color: #6275ff;
+  --border-color: #6dd08e;
+  --shawdow: rgba(0, 0, 0, 0.5);
+  --shawdow: rgba(0, 0, 0, 0.5);
+  --shawdow: rgba(0, 0, 0, 0.5);
+  --bg-top: rgba(255, 216, 62, 0);
+  --bg-top: rgba(239, 62, 255, 0);
+  --bg-top: rgba(62, 176, 255, 0);
+  --bg-top: rgba(62, 255, 107, 0);
+  --bg-top: rgba(97, 107, 212, 0);
+  --bg-bottom: #ffa531;
+  --bg-bottom: #8831ff;
+  --bg-bottom: #3161ff;
+  --bg-bottom: #0fa54e;
+  --bg-bottom: #3d43ae;
+  --bg: #ffd83e;
+  --bg: #ef3eff;
+  --bg: #3eb0ff;
+  --bg: #3eff6b;
+  --bg: #616bd4;
+}
+
+[data--mode="mode"] {
+  /* mode */
+  --bg-top: #65ef8b;
+  --bg-center: rgba(0, 148, 84, 0.45);
+  --bg-bottom: #28c079;
+  --bg: #00aa43;
+  --border-color: #6dd08e;
+  --shawdow: rgba(0, 0, 0, 0.5);
+}
+
+:root,
+[data-object-mode="mode-1"] {
+  /* mode-1 */
+  --main-btn-bg: #505395;
+  --main-btn-border: #6e76b1;
+  --main-btn-text-color: #ffffff;
+  --main-btn-text-border: rgba(19, 21, 42, 0.7);
+}
+
+[data-premium-item-bg-mode=] {
+  /*  */
+  --color: #c04c29;
+  --color: #5e32a7;
+  --color: #2b53a3;
+}
+
+[data-categories-game-mode="on"] {
+  /* on */
+  --text-linear4: #96d9ff;
+  --text-linear3: #9dc2ff;
+  --text-linear2: #e6ceff;
+  --text-linear1: #ebe1fb;
+  --icon-color: #9abfef;
+}
+
+[data-categories-game-mode="off"] {
+  /* off */
+  --text-linear4: #ffffff;
+  --text-linear3: #ffffff;
+  --text-linear2: #ffffff;
+  --text-linear1: #ffffff;
+  --icon-color: #5063b0;
+}
